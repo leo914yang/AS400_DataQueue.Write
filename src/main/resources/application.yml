@@ -1,0 +1,81 @@
+program:
+  programName: OrderReport
+  maxThreadRestartCount: 3
+
+queue:
+  preProcess:
+    threadCount: 5
+  connect:
+    - threadName: ORDER_MATCH_1
+      host: 10.99.1.6
+      user: DSMP
+      password: DSMPT02
+      queuePath: /QSYS.LIB/HHKGIQ.LIB/TORDMATQ5A.DTAQ
+      dataGroup: ORDER_MATCH
+      maxWaitTime: 60
+      maxRetryCount: 3
+      maxIdleHeartbeat: 5
+      ackMode: true
+      messageProcessorThreadCount: 1
+    - threadName: NON_TRADE_1
+      host: 10.99.1.209
+      user: DSMP
+      password: DSMP033
+      queuePath: /QSYS.LIB/HHKGIQ.LIB/B999BNTRQA.DTAQ
+      dataGroup: NON_TRADE
+      maxWaitTime: 60
+      maxRetryCount: 3
+      maxIdleHeartbeat: 5
+      ackMode: true
+      messageProcessorThreadCount: 1
+    - threadName: REAL_TIME_01
+      host: 10.99.1.206
+      user: DSMP
+      password: DSMP032
+      queuePath: /QSYS.LIB/SEKGIF.LIB/SEGPXX3SQ.DTAQ
+      dataGroup: REAL_TIME
+      maxWaitTime: 60
+      maxRetryCount: 3
+      maxIdleHeartbeat: 5
+      ackMode: true
+      messageProcessorThreadCount: 1
+    - threadName: REAL_TIME_02
+      host: 10.99.1.20
+      user: DSMP
+      password: DSMPT01
+      queuePath: /QSYS.LIB/SEKGIF.LIB/SEGPXX3SQ.DTAQ
+      dataGroup: REAL_TIME
+      maxWaitTime: 60
+      maxRetryCount: 3
+      maxIdleHeartbeat: 5
+      ackMode: true
+      messageProcessorThreadCount: 1
+    - threadName: REAL_TIME_03
+      host: 10.99.1.206
+      user: DSMP
+      password: DSMP032
+      queuePath: /QSYS.LIB/SEKGIF.LIB/SEGP0573SQ.DTAQ
+      dataGroup: REAL_TIME
+      maxWaitTime: 60
+      maxRetryCount: 3
+      maxIdleHeartbeat: 5
+      ackMode: true
+      messageProcessorThreadCount: 1
+    - threadName: REAL_TIME_04
+      host: 10.99.1.20
+      user: DSMP
+      password: DSMPT01
+      queuePath: /QSYS.LIB/SEKGIF.LIB/SEGP0573SQ.DTAQ
+      dataGroup: REAL_TIME
+      maxWaitTime: 60
+      maxRetryCount: 3
+      maxIdleHeartbeat: 5
+      ackMode: true
+      messageProcessorThreadCount: 1
+
+
+
+
+
+
+
