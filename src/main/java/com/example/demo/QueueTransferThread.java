@@ -8,6 +8,7 @@ import com.ibm.as400.access.DataQueueEntry;
 import lombok.Getter;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
@@ -39,9 +40,12 @@ public class QueueTransferThread extends Thread {
         if (!connectDataQueue()) {
             return;
         }
-        try (Stream<String> lines = Files.lines(Path.of(path))) {
+        try (Stream<String> lines = Files.lines(Path.of(path), StandardCharsets.UTF_8)) {
             lines.forEach(line -> {
                 try {
+                    if (line.startsWith("\uFEFF")) {
+                        line = line.substring(1);
+                    }
                     dataQueue.write(line);
                 } catch (Exception e) {
                     System.out.println("[run] Receive from DataQueue failed: " + e.getMessage());

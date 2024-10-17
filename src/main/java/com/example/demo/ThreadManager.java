@@ -36,19 +36,19 @@ public class ThreadManager {
         int totalQueue = connectConfig.getTotalQueue();
         List<QueueConnectInfoDto> queueConnectInfos = connectConfig.getConnect();
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter directory path: ");
-        Path directoryPath = Paths.get(scanner.nextLine());
+        String currentDirectory = Paths.get("").toAbsolutePath().toString();
+        Path directoryPath = Paths.get(currentDirectory);
         List<File> txtFiles = getTxtFilesInDirectory(directoryPath);
         try {
             for (File path : txtFiles) {
+                System.out.println("path: " + path);
                 String fileNameWithoutExtension = getFileNameWithoutExtension(path.getName());
-
+                System.out.println("file name: " + fileNameWithoutExtension);
                 QueueConnectInfoDto matchingInfo = queueConnectInfos.stream()
                         .filter(info -> info.getThreadName().equals(fileNameWithoutExtension))
                         .findFirst()
                         .orElse(null);
-
+                System.out.println("ConnectionDto: " + matchingInfo);
                 if (matchingInfo != null) {
                     QueueTransferThread workerThread = new QueueTransferThread(matchingInfo, path.toString());
                     workerThreadPoolExecutor.execute(workerThread);
@@ -75,7 +75,7 @@ public class ThreadManager {
     private String getFileNameWithoutExtension(String fileName) {
         int lastDotIndex = fileName.lastIndexOf('.');
         if (lastDotIndex == -1) {
-            return fileName; // No extension found
+            return null; // No extension found
         }
         return fileName.substring(0, lastDotIndex);
     }

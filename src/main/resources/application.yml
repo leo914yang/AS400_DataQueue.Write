@@ -40,10 +40,10 @@ queue:
       ackMode: true
       messageProcessorThreadCount: 1
     - threadName: REAL_TIME_02
-      host: 10.99.1.20
+      host: 10.99.1.206
       user: DSMP
-      password: DSMPT01
-      queuePath: /QSYS.LIB/SEKGIF.LIB/SEGPXX3SQ.DTAQ
+      password: DSMP032
+      queuePath: /QSYS.LIB/SEKGIF.LIB/SEGPXX4SQ.DTAQ
       dataGroup: REAL_TIME
       maxWaitTime: 60
       maxRetryCount: 3
